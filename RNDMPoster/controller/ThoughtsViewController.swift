@@ -50,7 +50,10 @@ class ThoughtsViewController: UIViewController {
     
     func setListener() {
         
-        thoughtsListner = thoguhtsCollectionRef.whereField(CATEGORY, isEqualTo: selectedCategory).addSnapshotListener { (snapshot, error) in
+        thoughtsListner = thoguhtsCollectionRef
+            .whereField(CATEGORY, isEqualTo: selectedCategory)
+            .order(by: TIMESTAMP, descending: true)
+            .addSnapshotListener { (snapshot, error) in
             
             if let error = error {
                 debugPrint("error fetching docs \(error)")

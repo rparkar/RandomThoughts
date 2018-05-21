@@ -32,6 +32,10 @@ class ThoughtCell: UITableViewCell {
         //timeStampLabel.text = thought.timestamp
         thoughtTextLabel.text = thought.thoughtText
         
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MMM d, hh:mm"
+        let timstamp = formatter.string(from: thought.timestamp)
+        timeStampLabel.text = timstamp
     }
 
 }
