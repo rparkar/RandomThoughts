@@ -25,6 +25,8 @@ class ThoughtsViewController: UIViewController {
     //variables
     private var thoughts = [Thoughts]()
     private var thoguhtsCollectionRef : CollectionReference!
+    private var thoughtsListner: ListenerRegistration!
+    private var selectedCategory = ThoughtCategory.funny.rawValue
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,12 +43,20 @@ class ThoughtsViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        thoguhtsCollectionRef.getDocuments { (snapshot, error) in
+       setListener()
+        
+        
+    }
+    
+    func setListener() {
+        
+        thoughtsListner = thoguhtsCollectionRef.whereField(CATEGORY, isEqualTo: selectedCategory).addSnapshotListener { (snapshot, error) in
             
             if let error = error {
                 debugPrint("error fetching docs \(error)")
             } else {
                 
+                self.thoughts.removeAll()
                 guard let snap = snapshot else {return}
                 
                 for document in snap.documents {
@@ -68,7 +78,33 @@ class ThoughtsViewController: UIViewController {
                 self.tableView.reloadData()
             }
         }
+        
     }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        
+        thoughtsListner.remove()
+    }
+    
+    
+    
+    
+    @IBAction func categoryChanged(_ sender: Any) {
+        
+        switch categorySegmentControl.selectedSegmentIndex {
+        case 0:
+            selectedCategory = ThoughtCategory.funny.rawValue
+        case 1 :
+            selectedCategory = ThoughtCategory.serious.rawValue
+        case 3: selectedCategory = ThoughtCategory.crazy.rawValue
+        default:
+            selectedCategory = ThoughtCategory.popular.rawValue
+        }
+        
+        thoughtsListner.remove()
+        setListener()
+    }
+    
 
 }
 
@@ -89,4 +125,14 @@ extension ThoughtsViewController : UITableViewDelegate, UITableViewDataSource {
         
         return cell
     }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 }
