@@ -7,15 +7,19 @@
 //
 
 import UIKit
+import Firebase
 
 class AddThoughtsViewController: UIViewController {
     
     //outlets
-    
     @IBOutlet weak var categorySegment: UISegmentedControl!
     @IBOutlet weak var userNameTextField: UITextField!
     @IBOutlet weak var thoughtsTextView: UITextView!
     @IBOutlet weak var postButton: UIButton!
+    
+    //variables
+    private var selectedCategory = ThoughtCategory.funny.rawValue
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,15 +36,42 @@ class AddThoughtsViewController: UIViewController {
         thoughtsTextView.textColor = UIColor.lightGray
     }
     
-    func textFieldDidBeginEditing(_ textField: UITextField) {
+    func textViewDidBeginEditing(_ textView: UITextView) {
         thoughtsTextView.text = ""
         thoughtsTextView.textColor = UIColor.darkGray
     }
     
     @IBAction func categoryChanged(_ sender: Any) {
+        
+        switch categorySegment.selectedSegmentIndex {
+        case 0:
+            selectedCategory = ThoughtCategory.funny.rawValue
+        case 1 :
+            selectedCategory = ThoughtCategory.serious.rawValue
+        default:
+            selectedCategory = ThoughtCategory.crazy.rawValue
+        }
     }
     
     @IBAction func postButtonPressed(_ sender: Any) {
+        
+        guard let username = userNameTextField.text else {return}
+        
+        Firestore.firestore().collection("thoughts").addDocument(data: [
+            "category" : selectedCategory,
+            "numComments": 0,
+            "numLikes": 0,
+            "thoughtText": thoughtsTextView.text,
+            "timestamp":FieldValue.serverTimestamp(),
+            "username" : username
+            ]) { (error) in
+            
+            if let error = error  {
+                debugPrint("error \(error)")
+            } else {
+                self.navigationController?.popViewController(animated: true)
+            }
+        }
     }
 
 }
