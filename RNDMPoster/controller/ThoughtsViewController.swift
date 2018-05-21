@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 enum ThoughtCategory: String {
     case serious = "serious"
@@ -23,6 +24,7 @@ class ThoughtsViewController: UIViewController {
     
     //variables
     private var thoughts = [Thoughts]()
+    private var thoguhtsCollectionRef : CollectionReference!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,9 +34,41 @@ class ThoughtsViewController: UIViewController {
         tableView.estimatedRowHeight = 80
         tableView.rowHeight = UITableViewAutomaticDimension
         
+        thoguhtsCollectionRef = Firestore.firestore().collection(THOUGHTS_REF)
 
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        thoguhtsCollectionRef.getDocuments { (snapshot, error) in
+            
+            if let error = error {
+                debugPrint("error fetching docs \(error)")
+            } else {
+                
+                guard let snap = snapshot else {return}
+                
+                for document in snap.documents {
+                    
+                    let data = document.data()
+                    let username = data[USERNAME] as? String ?? "Authur unknown"
+                    let timestamp = data[TIMESTAMP] as? Date ?? Date()
+                    let thoughtText = data[THOUGHT_TEXT] as? String ?? ""
+                    let numLikes = data[NUM_LIKES] as? Int ?? 0
+                    let numComments = data[NUM_COMMENTS] as? Int ?? 0
+                    let documentID = document.documentID
+                    
+                    let newThought = Thoughts(username: username, timestamp: timestamp, thoughtText: thoughtText, numLikes: numLikes, numComments: numComments, documentId: documentID)
+                    
+                    self.thoughts.append(newThought)
+                    
+                }
+                
+                self.tableView.reloadData()
+            }
+        }
+    }
 
 }
 

@@ -27,6 +27,10 @@ class ThoughtCell: UITableViewCell {
 
     func configureCell(thought: Thoughts) {
 
+        userNameLabel.text = thought.username
+        numLikes.text = String(thought.numLikes) // "\(thought.numLikes)"
+        //timeStampLabel.text = thought.timestamp
+        thoughtTextLabel.text = thought.thoughtText
         
     }
 
