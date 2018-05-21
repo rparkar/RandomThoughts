@@ -29,15 +29,15 @@
                                 </segments>
                                 <color key="tintColor" red="0.94275027509999998" green="0.68063069779999996" blue="0.4012731055" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             </segmentedControl>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Gn3-E1-nyO">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Gn3-E1-nyO">
                                 <rect key="frame" x="0.0" y="128" width="375" height="539"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="100" id="9MI-qh-3lo">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="thoughtCell" rowHeight="100" id="9MI-qh-3lo" customClass="ThoughtCell" customModule="RNDMPoster" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="100"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="9MI-qh-3lo" id="uKP-w6-NAS">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="99.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wCq-65-E2V">
@@ -89,6 +89,13 @@
                                                 <constraint firstItem="HQs-Mw-22a" firstAttribute="centerY" secondItem="wCq-65-E2V" secondAttribute="centerY" id="usR-CR-SdC"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="likesStarImage" destination="Tbx-tu-aGA" id="gIe-AO-e8P"/>
+                                            <outlet property="numLikes" destination="Qj9-9W-4bc" id="82K-dV-AV3"/>
+                                            <outlet property="thoughtTextLabel" destination="wbT-8U-m5T" id="UcZ-B1-aj3"/>
+                                            <outlet property="timeStampLabel" destination="HQs-Mw-22a" id="mdP-6n-uBa"/>
+                                            <outlet property="userNameLabel" destination="wCq-65-E2V" id="vCt-Ym-J6j"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>

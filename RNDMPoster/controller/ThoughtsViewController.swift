@@ -18,14 +18,19 @@ enum ThoughtCategory: String {
 class ThoughtsViewController: UIViewController {
 
     //outlets
-    @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var categorySegmentControl: UISegmentedControl!
+    @IBOutlet private weak var tableView: UITableView!
+    @IBOutlet  private weak var categorySegmentControl: UISegmentedControl!
+    
+    //variables
+    private var thoughts = [Thoughts]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.estimatedRowHeight = 80
+        tableView.rowHeight = UITableViewAutomaticDimension
         
 
     }
@@ -40,10 +45,14 @@ extension ThoughtsViewController : UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        <#code#>
+        return thoughts.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        <#code#>
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "thoughtCell") as? ThoughtCell else {return UITableViewCell()}
+        
+        cell.configureCell(thought: thoughts[indexPath.row])
+        
+        return cell
     }
 }
