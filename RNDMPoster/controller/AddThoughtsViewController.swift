@@ -57,13 +57,13 @@ class AddThoughtsViewController: UIViewController {
         
         guard let username = userNameTextField.text else {return}
         
-        Firestore.firestore().collection("thoughts").addDocument(data: [
-            "category" : selectedCategory,
-            "numComments": 0,
-            "numLikes": 0,
-            "thoughtText": thoughtsTextView.text,
-            "timestamp":FieldValue.serverTimestamp(),
-            "username" : username
+        Firestore.firestore().collection(THOUGHTS_REF).addDocument(data: [
+            CATEGORY: selectedCategory,
+            NUM_COMMENTS: 0,
+            NUM_LIKES: 0,
+            THOUGHT_TEXT: thoughtsTextView.text,
+            TIMESTAMP:FieldValue.serverTimestamp(),
+            USERNAME : username
             ]) { (error) in
             
             if let error = error  {
