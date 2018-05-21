@@ -50,35 +50,37 @@ class ThoughtsViewController: UIViewController {
     
     func setListener() {
         
-        thoughtsListner = thoguhtsCollectionRef
-            .whereField(CATEGORY, isEqualTo: selectedCategory)
-            .order(by: TIMESTAMP, descending: true)
-            .addSnapshotListener { (snapshot, error) in
+        if selectedCategory == ThoughtCategory.popular.rawValue {
             
-            if let error = error {
-                debugPrint("error fetching docs \(error)")
-            } else {
-                
-                self.thoughts.removeAll()
-                guard let snap = snapshot else {return}
-                
-                for document in snap.documents {
+            thoughtsListner = thoguhtsCollectionRef
+                .order(by: NUM_LIKES, descending: true)
+                .addSnapshotListener { (snapshot, error) in
                     
-                    let data = document.data()
-                    let username = data[USERNAME] as? String ?? "Authur unknown"
-                    let timestamp = data[TIMESTAMP] as? Date ?? Date()
-                    let thoughtText = data[THOUGHT_TEXT] as? String ?? ""
-                    let numLikes = data[NUM_LIKES] as? Int ?? 0
-                    let numComments = data[NUM_COMMENTS] as? Int ?? 0
-                    let documentID = document.documentID
+                    if let error = error {
+                        debugPrint("error fetching docs \(error)")
+                    } else {
+                        
+                        self.thoughts.removeAll()
+                        self.thoughts = Thoughts.parseData(snapshot: snapshot)
+                        self.tableView.reloadData()
+                    }
+            }
+            
+        } else {
+            
+            thoughtsListner = thoguhtsCollectionRef
+                .whereField(CATEGORY, isEqualTo: selectedCategory)
+                .order(by: TIMESTAMP, descending: true)
+                .addSnapshotListener { (snapshot, error) in
                     
-                    let newThought = Thoughts(username: username, timestamp: timestamp, thoughtText: thoughtText, numLikes: numLikes, numComments: numComments, documentId: documentID)
-                    
-                    self.thoughts.append(newThought)
-                    
-                }
-                
-                self.tableView.reloadData()
+                    if let error = error {
+                        debugPrint("error fetching docs \(error)")
+                    } else {
+                        
+                        self.thoughts.removeAll()
+                        self.thoughts = Thoughts.parseData(snapshot: snapshot)
+                        self.tableView.reloadData()
+                    }
             }
         }
         
@@ -99,7 +101,7 @@ class ThoughtsViewController: UIViewController {
             selectedCategory = ThoughtCategory.funny.rawValue
         case 1 :
             selectedCategory = ThoughtCategory.serious.rawValue
-        case 3: selectedCategory = ThoughtCategory.crazy.rawValue
+        case 2: selectedCategory = ThoughtCategory.crazy.rawValue
         default:
             selectedCategory = ThoughtCategory.popular.rawValue
         }
