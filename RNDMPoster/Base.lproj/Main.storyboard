@@ -13,7 +13,7 @@
         <!--Thougts+-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="RNDMPoster" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ThoughtsViewController" customModule="RNDMPoster" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -32,10 +32,10 @@
             </objects>
             <point key="canvasLocation" x="1100" y="134"/>
         </scene>
-        <!--Thoughts View Controller-->
+        <!--Add Thoughts View Controller-->
         <scene sceneID="fPO-ff-XoE">
             <objects>
-                <viewController id="NT7-vv-s6X" customClass="ThoughtsViewController" customModule="RNDMPoster" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="NT7-vv-s6X" customClass="AddThoughtsViewController" customModule="RNDMPoster" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="eSp-fh-xq8">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -49,6 +49,9 @@
                                     <segment title="Crazy"/>
                                 </segments>
                                 <color key="tintColor" red="0.94275027509999998" green="0.68063069779999996" blue="0.4012731055" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <connections>
+                                    <action selector="categoryChanged:" destination="NT7-vv-s6X" eventType="valueChanged" id="dbP-Wm-HHC"/>
+                                </connections>
                             </segmentedControl>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="username" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ZYh-gW-wqk">
                                 <rect key="frame" x="20" y="128" width="335" height="20"/>
@@ -57,17 +60,17 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.25" contentMode="scaleToFill" text="something to post" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="1ps-kc-sMj">
-                                <rect key="frame" x="20" y="156" width="335" height="120"/>
+                                <rect key="frame" x="20" y="156" width="335" height="160"/>
                                 <color key="backgroundColor" red="0.83741801979999997" green="0.83743780850000005" blue="0.83742713930000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="120" id="5tn-my-S90"/>
+                                    <constraint firstAttribute="height" constant="160" id="5tn-my-S90"/>
                                 </constraints>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QH6-on-Xdk">
-                                <rect key="frame" x="152.5" y="296" width="70" height="40"/>
+                                <rect key="frame" x="152.5" y="336" width="70" height="40"/>
                                 <color key="backgroundColor" red="0.94275027509999998" green="0.68063069779999996" blue="0.4012731055" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="UaD-f7-9J5"/>
@@ -77,6 +80,9 @@
                                 <state key="normal" title="POST">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="postButtonPressed:" destination="NT7-vv-s6X" eventType="touchUpInside" id="gCR-b3-ly0"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -95,6 +101,12 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="kyh-re-RGV"/>
                     </view>
+                    <connections>
+                        <outlet property="categorySegment" destination="JIF-iP-DBE" id="02B-Ch-yRW"/>
+                        <outlet property="postButton" destination="QH6-on-Xdk" id="Ql0-Ls-Kee"/>
+                        <outlet property="thoughtsTextView" destination="1ps-kc-sMj" id="4h7-yy-GwZ"/>
+                        <outlet property="userNameTextField" destination="ZYh-gW-wqk" id="Rst-Fy-cxr"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MfB-Hv-HDs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
