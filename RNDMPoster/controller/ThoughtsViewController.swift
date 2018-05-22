@@ -27,6 +27,7 @@ class ThoughtsViewController: UIViewController {
     private var thoguhtsCollectionRef : CollectionReference!
     private var thoughtsListner: ListenerRegistration!
     private var selectedCategory = ThoughtCategory.funny.rawValue
+    private var handle: AuthStateDidChangeListenerHandle?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,10 +44,27 @@ class ThoughtsViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-       setListener()
-        
+        handle = Auth.auth().addStateDidChangeListener({ (auth, user) in
+            
+            if user == nil {
+                let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+                let loginVC = storyBoard.instantiateViewController(withIdentifier: "loginVC")
+                self.present(loginVC, animated: true, completion: nil)
+                
+            } else {
+                     self.setListener()
+            }
+        })
         
     }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        if thoughtsListner != nil {
+           thoughtsListner.remove()
+        }
+        
+    }
+    
     
     func setListener() {
         
@@ -86,13 +104,6 @@ class ThoughtsViewController: UIViewController {
         
     }
     
-    override func viewDidDisappear(_ animated: Bool) {
-        
-        thoughtsListner.remove()
-    }
-    
-    
-    
     
     @IBAction func categoryChanged(_ sender: Any) {
         
@@ -108,6 +119,18 @@ class ThoughtsViewController: UIViewController {
         
         thoughtsListner.remove()
         setListener()
+    }
+    
+    @IBAction func logoutPressed(_ sender: Any) {
+        
+        let firebaseAuth = Auth.auth()
+        
+        do {
+            try firebaseAuth.signOut()
+            
+        } catch let signoutError as NSError {
+            debugPrint("error signin out \(signoutError)")
+        }
     }
     
 
@@ -130,13 +153,6 @@ extension ThoughtsViewController : UITableViewDelegate, UITableViewDataSource {
         
         return cell
     }
-    
-    
-    
-    
-    
-    
-    
     
     
     

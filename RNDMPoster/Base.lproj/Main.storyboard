@@ -117,6 +117,11 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" title="Thougts+" id="kec-kG-AzF">
+                        <barButtonItem key="leftBarButtonItem" title="Logout" id="oy1-aF-B7B">
+                            <connections>
+                                <action selector="logoutPressed:" destination="BYZ-38-t0r" id="38m-fa-VSb"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" image="addThoughtIcon" id="SzS-o4-vbX">
                             <connections>
                                 <segue destination="NT7-vv-s6X" kind="show" id="bhg-DB-jjX"/>
@@ -130,7 +135,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1100" y="133.5832083958021"/>
+            <point key="canvasLocation" x="1076" y="-52"/>
         </scene>
         <!--Add Thoughts View Controller-->
         <scene sceneID="fPO-ff-XoE">
@@ -210,12 +215,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MfB-Hv-HDs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1881" y="133"/>
+            <point key="canvasLocation" x="1881" y="-53"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="HT8-Eh-BWD">
             <objects>
-                <viewController id="ZzI-QC-SL6" customClass="LoginViewController" customModule="RNDMPoster" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="loginVC" id="ZzI-QC-SL6" customClass="LoginViewController" customModule="RNDMPoster" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Lmv-nw-1Kf">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -277,6 +282,7 @@
                                 </state>
                                 <connections>
                                     <action selector="createAccountButtonPressed:" destination="ZzI-QC-SL6" eventType="touchUpInside" id="b2M-Ux-ZLY"/>
+                                    <segue destination="F5M-VT-hfM" kind="show" id="bEm-WF-09V"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d0N-9p-9fV">
@@ -343,7 +349,7 @@
                 </stackView>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xYu-fe-57f" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1729" y="427"/>
+            <point key="canvasLocation" x="-1590" y="427"/>
         </scene>
         <!--Create User View Controller-->
         <scene sceneID="gxq-lt-Ug9">
@@ -464,7 +470,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vIL-vb-kMd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-912" y="425"/>
+            <point key="canvasLocation" x="-759" y="427"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="VHV-NS-zsP">
@@ -487,7 +493,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5om-eF-afd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="100" y="409"/>
+            <point key="canvasLocation" x="142" y="227"/>
         </scene>
     </scenes>
     <resources>
