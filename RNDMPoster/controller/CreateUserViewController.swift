@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class CreateUserViewController: UIViewController {
     
@@ -18,6 +19,8 @@ class CreateUserViewController: UIViewController {
     @IBOutlet private weak var createAccountButton: UIButton!
     @IBOutlet private weak var cancelButton: UIButton!
     
+    //variables
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,10 +31,49 @@ class CreateUserViewController: UIViewController {
     }
     
     @IBAction func createAccountPressed(_ sender: Any) {
+        
+        guard let email = emailTextField.text,
+            let password = passwordTextFIeld.text,
+            let username = usernameTextField.text else {return}
+        
+        Auth.auth().createUser(withEmail: email, password: password) { (user, error) in
+            
+            if let error = error {
+                debugPrint("error creating user \(error.localizedDescription)")
+            } else {
+                
+            }
+            
+            let changeRequest = user?.createProfileChangeRequest()
+            changeRequest?.displayName = username
+            changeRequest?.commitChanges(completion: { (error) in
+                
+                if let error = error {
+                    debugPrint("\(error.localizedDescription)")
+                }
+            })
+            
+            guard let userId = user?.uid else {return}
+            
+            Firestore.firestore().collection(USERS_REF).document(userId).setData([
+                USERNAME : username,
+                DATE_CREATED: FieldValue.serverTimestamp()
+                
+                ], completion: { (error) in
+                
+                    if let error = error {
+                        debugPrint(error.localizedDescription)
+                        
+                    } else {
+                        self.dismiss(animated: true, completion: nil)
+                    }
+            })
+        }
     }
     
-    @IBOutlet weak var cancelButtonPressed: UIButton!
-    
+    @IBAction func cancelButtonPressed(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
     
 
 

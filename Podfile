@@ -8,5 +8,6 @@ target 'RNDMPoster' do
   # Pods for RNDMPoster
   pod 'Firebase/Core'
   pod 'Firebase/Firestore'
+  pod 'Firebase/Auth'
 
 end

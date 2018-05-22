@@ -429,6 +429,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
+                                    <action selector="cancelButtonPressed:" destination="F5M-VT-hfM" eventType="touchUpInside" id="rtP-u1-OGQ"/>
                                     <action selector="loginButtonPressed:" destination="ZzI-QC-SL6" eventType="touchUpInside" id="dDp-yS-eh3"/>
                                 </connections>
                             </button>
@@ -455,7 +456,6 @@
                     </view>
                     <connections>
                         <outlet property="cancelButton" destination="6bO-m9-vDc" id="jYt-T6-hEt"/>
-                        <outlet property="cancelButtonPressed" destination="6bO-m9-vDc" id="CnE-gV-HsB"/>
                         <outlet property="createAccountButton" destination="mLC-hk-iQt" id="zaj-ot-hau"/>
                         <outlet property="emailTextField" destination="k8f-4I-SRm" id="MCC-ON-X6M"/>
                         <outlet property="passwordTextFIeld" destination="HI0-jb-UUK" id="DF0-5E-AHA"/>
