@@ -21,10 +21,16 @@ class CommentsCell: UITableViewCell {
         // Initialization code
     }
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+    func configureCell(comment: Comments) {
+        
+        userNameLabel.text = comment.username
+        commentLabel.text = comment.commentsText
+        
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MMM d, hh:mm"
+        let timestamp = formatter.string(from: comment.timeStamp)
+        timeStampLabel.text = timestamp
+        
     }
 
 }
