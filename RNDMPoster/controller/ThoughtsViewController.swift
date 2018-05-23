@@ -154,6 +154,24 @@ extension ThoughtsViewController : UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        performSegue(withIdentifier: "commentsVC", sender: thoughts[indexPath.row])
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier == "commentsVC" {
+            
+            if let destination = segue.destination as? CommentsViewController {
+                
+                if let thought = sender as? Thoughts {
+                    destination.thought = thought
+                }
+                
+            }
+        }
+    }
     
     
 }
