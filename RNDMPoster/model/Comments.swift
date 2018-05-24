@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Firebase
 
 class Comments {
     
@@ -20,6 +21,27 @@ class Comments {
         self.username = username
         self.timeStamp = timeStamp
         self.commentsText = commentsText
+    }
+    
+    class func parseData(snapshot: QuerySnapshot?) -> [Comments] {
+        var comments = [Comments]()
+        
+        guard let snap = snapshot else {return comments}
+        
+        for document in snap.documents {
+            
+            let data = document.data()
+            let username = data[USERNAME] as? String ?? "Authur unknown"
+            let timestamp = data[TIMESTAMP] as? Date ?? Date()
+            let commentText = data[COMMENT_TEXT] as? String ?? ""
+            
+            let newComment = Comments(username: username, timeStamp: timestamp, commentsText: commentText)
+            
+            comments.append(newComment)
+            
+        }
+        
+        return comments
     }
     
     

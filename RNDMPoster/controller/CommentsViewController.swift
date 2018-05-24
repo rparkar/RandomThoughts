@@ -24,6 +24,8 @@ class CommentsViewController: UIViewController {
     var thoughtsRef: DocumentReference!
     let fireStore = Firestore.firestore()
     var username: String!
+    var commentLister: ListenerRegistration!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,7 +37,31 @@ class CommentsViewController: UIViewController {
         if let name = Auth.auth().currentUser?.displayName {
             username = name
         }
+        
+        keyboardView.bindToKeyboard()
 
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        commentLister = fireStore.collection(THOUGHTS_REF).document(self.thought.documentId)
+            .collection(COMMENTS_REF)
+            .order(by: TIMESTAMP, descending: false)
+            .addSnapshotListener({ (snapshot, error) in
+            
+            guard let snapshot = snapshot else {
+                debugPrint("error \(error!)")
+                return }
+            
+            self.comments.removeAll()
+            self.comments = Comments.parseData(snapshot: snapshot)
+            
+            self.tableView.reloadData()
+            
+        })
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        commentLister.remove()
     }
 
     
@@ -76,6 +102,7 @@ class CommentsViewController: UIViewController {
                 debugPrint("transaction failed: \(error)")
             } else {
                 self.addCommentTextField.text = ""
+                self.addCommentTextField.resignFirstResponder()
             }
             
         }
