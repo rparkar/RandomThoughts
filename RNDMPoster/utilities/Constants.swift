@@ -20,3 +20,6 @@ let USERNAME = "username"
 
 let USERS_REF = "users"
 let DATE_CREATED = "dateCreated"
+
+let COMMENTS_REF = "comments"
+let COMMENT_TEXT = "commentText"
