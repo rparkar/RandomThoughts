@@ -116,7 +116,55 @@ class CommentsViewController: UIViewController {
 extension CommentsViewController: UITableViewDelegate, UITableViewDataSource, CommentDelegate {
     
     func commentOptionsTapped(comment: Comments) {
-        <#code#>
+        let alert = UIAlertController(title: "Edit Comment?", message: "You can delete or edit your comment", preferredStyle: .actionSheet)
+        
+        let editAction = UIAlertAction(title: "Edit comment", style: .default) { (action) in
+            //edit
+        }
+        
+        let deleteAction = UIAlertAction(title: "Delete Comment", style: .destructive) { (action) in
+           
+            
+            self.fireStore.runTransaction({ (transaction, errorPointer) -> Any? in
+                
+                let thoughtDocument: DocumentSnapshot
+                
+                do {
+                    try thoughtDocument = transaction.getDocument(self.fireStore.collection(THOUGHTS_REF).document(self.thought.documentId))
+                    
+                } catch let error as NSError {
+                    debugPrint("error fetching \(error.localizedDescription)")
+                    return nil
+                }
+                
+                guard let oldNumComments = thoughtDocument.data()![NUM_COMMENTS] as? Int else {return nil}
+                
+                transaction.updateData([NUM_COMMENTS: oldNumComments - 1], forDocument: self.thoughtsRef)
+                
+                let commentRef = self.fireStore.collection(THOUGHTS_REF).document(self.thought.documentId).collection(COMMENTS_REF).document(comment.documentId)
+                
+                transaction.deleteDocument(commentRef)
+                
+                return nil
+                
+            }) { (object, error) in
+                
+                if let error = error {
+                    debugPrint("transaction failed \(error)")
+                } else {
+                    alert.dismiss(animated: true, completion: nil)
+                }
+                
+            }
+            
+        }
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        
+        alert.addAction(editAction)
+        alert.addAction(cancelAction)
+        alert.addAction(deleteAction)
+        present(alert, animated: true, completion: nil)
     }
     
     
