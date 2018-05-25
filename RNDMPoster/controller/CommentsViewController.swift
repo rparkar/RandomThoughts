@@ -113,7 +113,13 @@ class CommentsViewController: UIViewController {
 
 }
 
-extension CommentsViewController: UITableViewDelegate, UITableViewDataSource {
+extension CommentsViewController: UITableViewDelegate, UITableViewDataSource, CommentDelegate {
+    
+    func commentOptionsTapped(comment: Comments) {
+        <#code#>
+    }
+    
+    
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -125,7 +131,7 @@ extension CommentsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "commentCell", for: indexPath) as? CommentsCell else {return UITableViewCell()}
-        cell.configureCell(comment: comments[indexPath.row])
+        cell.configureCell(comment: comments[indexPath.row], delegate: self)
         
         return cell
     }

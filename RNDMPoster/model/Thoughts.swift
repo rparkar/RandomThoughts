@@ -29,6 +29,7 @@ class Thoughts {
         self.thoughtText = thoughtText
         self.userId = userId
         
+        
     }
     
     class func parseData(snapshot: QuerySnapshot?) -> [Thoughts] {

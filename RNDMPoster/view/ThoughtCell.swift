@@ -8,10 +8,16 @@
 
 import UIKit
 import  Firebase
+
+protocol ThoughtDelegate {
+    
+    func thoughtOptionsMenuTapped(thought: Thoughts)
+}
+
+
 class ThoughtCell: UITableViewCell {
 
     //outlets
-    
     @IBOutlet private weak var userNameLabel: UILabel!
     @IBOutlet private weak var numLikes: UILabel!
     @IBOutlet private weak var likesStarImage: UIImageView!
@@ -23,6 +29,8 @@ class ThoughtCell: UITableViewCell {
     
     //variables
     private var thought: Thoughts!
+    private var delegate: ThoughtDelegate?
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -33,10 +41,11 @@ class ThoughtCell: UITableViewCell {
     }
 
 
-    func configureCell(thought: Thoughts) {
+    func configureCell(thought: Thoughts, delegate: ThoughtDelegate?) {
 
         self.thought = thought
-        
+        self.delegate = delegate
+        optionMenuImage.isHidden = true
         userNameLabel.text = thought.username
         numLikes.text = String(thought.numLikes) // "\(thought.numLikes)"
         //timeStampLabel.text = thought.timestamp
@@ -47,8 +56,20 @@ class ThoughtCell: UITableViewCell {
         formatter.dateFormat = "MMM d, hh:mm"
         let timstamp = formatter.string(from: thought.timestamp)
         timeStampLabel.text = timstamp
+        
+        if thought.userId == Auth.auth().currentUser?.uid {
+            optionMenuImage.isHidden = false
+            optionMenuImage.isUserInteractionEnabled = true
+            
+            let tap = UITapGestureRecognizer(target: self, action: #selector(thoughtMenuOptionsTapped))
+            optionMenuImage.addGestureRecognizer(tap)
+            
+        }
     }
     
+    @objc func thoughtMenuOptionsTapped() {
+        delegate?.thoughtOptionsMenuTapped(thought: thought)
+    }
     
     @objc func likeTapped() {
         Firestore.firestore().collection(THOUGHTS_REF).document(thought.documentId)

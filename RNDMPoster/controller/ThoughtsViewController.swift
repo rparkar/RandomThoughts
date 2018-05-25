@@ -136,7 +136,13 @@ class ThoughtsViewController: UIViewController {
 
 }
 
-extension ThoughtsViewController : UITableViewDelegate, UITableViewDataSource {
+extension ThoughtsViewController : UITableViewDelegate, UITableViewDataSource, ThoughtDelegate {
+    
+    func thoughtOptionsMenuTapped(thought: Thoughts) {
+        
+        
+    }
+    
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -149,7 +155,7 @@ extension ThoughtsViewController : UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "thoughtCell") as? ThoughtCell else {return UITableViewCell()}
         
-        cell.configureCell(thought: thoughts[indexPath.row])
+        cell.configureCell(thought: thoughts[indexPath.row], delegate: self)
         
         return cell
     }
