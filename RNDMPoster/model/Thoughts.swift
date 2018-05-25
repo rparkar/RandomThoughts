@@ -17,8 +17,9 @@ class Thoughts {
     private (set) public var timestamp: Date!
     private (set) public var username: String
     private (set) public var documentId: String!
+    private (set) public var userId: String!
     
-    init(username: String, timestamp: Date, thoughtText: String, numLikes: Int, numComments: Int, documentId: String) {
+    init(username: String, timestamp: Date, thoughtText: String, numLikes: Int, numComments: Int, documentId: String, userId: String) {
         
         self.username = username
         self.documentId = documentId
@@ -26,6 +27,7 @@ class Thoughts {
         self.numLikes = numLikes
         self.numComments = numComments
         self.thoughtText = thoughtText
+        self.userId = userId
         
     }
     
@@ -43,8 +45,9 @@ class Thoughts {
             let numLikes = data[NUM_LIKES] as? Int ?? 0
             let numComments = data[NUM_COMMENTS] as? Int ?? 0
             let documentID = document.documentID
+            let userId = data[USER_ID] as? String ?? ""
             
-            let newThought = Thoughts(username: username, timestamp: timestamp, thoughtText: thoughtText, numLikes: numLikes, numComments: numComments, documentId: documentID)
+            let newThought = Thoughts(username: username, timestamp: timestamp, thoughtText: thoughtText, numLikes: numLikes, numComments: numComments, documentId: documentID, userId: userId)
             
             thoughts.append(newThought)
             

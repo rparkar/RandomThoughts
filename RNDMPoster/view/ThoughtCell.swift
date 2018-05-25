@@ -19,6 +19,7 @@ class ThoughtCell: UITableViewCell {
     @IBOutlet private weak var thoughtTextLabel: UILabel!
     @IBOutlet weak var commentImage: UIImageView!
     @IBOutlet weak var numberCommentsLabel: UILabel!
+    @IBOutlet weak var optionMenuImage: UIImageView!
     
     //variables
     private var thought: Thoughts!

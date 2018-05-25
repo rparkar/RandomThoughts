@@ -63,7 +63,8 @@ class AddThoughtsViewController: UIViewController {
             NUM_LIKES: 0,
             THOUGHT_TEXT: thoughtsTextView.text,
             TIMESTAMP:FieldValue.serverTimestamp(),
-            USERNAME : username
+            USERNAME : username,
+            USER_ID: Auth.auth().currentUser?.uid ?? ""
             ]) { (error) in
             
             if let error = error  {

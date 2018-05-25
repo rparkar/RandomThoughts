@@ -92,6 +92,9 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ellipsis" translatesAutoresizingMaskIntoConstraints="NO" id="vZ1-gj-840">
+                                                    <rect key="frame" x="325" y="2" width="30" height="30"/>
+                                                </imageView>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="wbT-8U-m5T" firstAttribute="leading" secondItem="uKP-w6-NAS" secondAttribute="leading" constant="20" id="1cp-9F-lAs"/>
@@ -99,7 +102,9 @@
                                                 <constraint firstItem="wCq-65-E2V" firstAttribute="leading" secondItem="uKP-w6-NAS" secondAttribute="leading" constant="20" id="Ddx-Cj-HQD"/>
                                                 <constraint firstAttribute="trailing" secondItem="wbT-8U-m5T" secondAttribute="trailing" constant="20" id="P3k-vd-dWa"/>
                                                 <constraint firstItem="wCq-65-E2V" firstAttribute="top" secondItem="uKP-w6-NAS" secondAttribute="top" constant="5" id="S9d-Us-hGl"/>
+                                                <constraint firstAttribute="trailing" secondItem="vZ1-gj-840" secondAttribute="trailing" constant="20" id="SqP-xP-BCp"/>
                                                 <constraint firstItem="Zve-jB-1wj" firstAttribute="top" secondItem="wbT-8U-m5T" secondAttribute="bottom" constant="8" id="Szt-J1-Ijn"/>
+                                                <constraint firstItem="vZ1-gj-840" firstAttribute="centerY" secondItem="HQs-Mw-22a" secondAttribute="centerY" id="b1g-fE-H9s"/>
                                                 <constraint firstItem="HQs-Mw-22a" firstAttribute="leading" secondItem="wCq-65-E2V" secondAttribute="trailing" constant="8" id="ecg-CN-YOM"/>
                                                 <constraint firstItem="wbT-8U-m5T" firstAttribute="top" secondItem="wCq-65-E2V" secondAttribute="bottom" constant="8" id="geZ-Bz-bAS"/>
                                                 <constraint firstItem="Zve-jB-1wj" firstAttribute="leading" secondItem="uKP-w6-NAS" secondAttribute="leading" constant="20" id="kdh-wK-xF1"/>
@@ -111,6 +116,7 @@
                                             <outlet property="likesStarImage" destination="Tbx-tu-aGA" id="gIe-AO-e8P"/>
                                             <outlet property="numLikes" destination="Qj9-9W-4bc" id="82K-dV-AV3"/>
                                             <outlet property="numberCommentsLabel" destination="f1r-Nu-G11" id="x9U-oN-Qzf"/>
+                                            <outlet property="optionMenuImage" destination="vZ1-gj-840" id="9zz-DG-nxE"/>
                                             <outlet property="thoughtTextLabel" destination="wbT-8U-m5T" id="UcZ-B1-aj3"/>
                                             <outlet property="timeStampLabel" destination="HQs-Mw-22a" id="mdP-6n-uBa"/>
                                             <outlet property="userNameLabel" destination="wCq-65-E2V" id="vCt-Ym-J6j"/>
@@ -151,7 +157,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1020" y="226"/>
+            <point key="canvasLocation" x="1020" y="225.33733133433284"/>
         </scene>
         <!--Add Thoughts View Controller-->
         <scene sceneID="fPO-ff-XoE">
@@ -270,14 +276,19 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ellipsis" translatesAutoresizingMaskIntoConstraints="NO" id="sBJ-Aj-KKK">
+                                                    <rect key="frame" x="325" y="4" width="30" height="30"/>
+                                                </imageView>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="MTh-Zl-REM" firstAttribute="centerY" secondItem="wj0-F3-5vq" secondAttribute="centerY" id="7r4-CT-zHN"/>
+                                                <constraint firstItem="sBJ-Aj-KKK" firstAttribute="centerY" secondItem="MTh-Zl-REM" secondAttribute="centerY" id="BW9-B8-ZbB"/>
                                                 <constraint firstAttribute="bottom" secondItem="yAw-Td-Df9" secondAttribute="bottom" constant="8" id="BnN-cq-Mmu"/>
                                                 <constraint firstItem="MTh-Zl-REM" firstAttribute="leading" secondItem="wj0-F3-5vq" secondAttribute="trailing" constant="8" id="NKQ-yB-NXN"/>
                                                 <constraint firstAttribute="trailing" secondItem="yAw-Td-Df9" secondAttribute="trailing" constant="20" id="Rym-RL-UiV"/>
                                                 <constraint firstItem="yAw-Td-Df9" firstAttribute="leading" secondItem="pqp-rO-ab9" secondAttribute="leading" constant="20" id="XLp-39-ZnB"/>
                                                 <constraint firstItem="wj0-F3-5vq" firstAttribute="top" secondItem="pqp-rO-ab9" secondAttribute="top" constant="8" id="oZz-pr-qkK"/>
+                                                <constraint firstAttribute="trailing" secondItem="sBJ-Aj-KKK" secondAttribute="trailing" constant="20" id="rRm-qG-7cX"/>
                                                 <constraint firstAttribute="trailing" secondItem="yAw-Td-Df9" secondAttribute="trailing" constant="20" id="szY-Or-2xu"/>
                                                 <constraint firstItem="wj0-F3-5vq" firstAttribute="leading" secondItem="pqp-rO-ab9" secondAttribute="leading" constant="20" id="vNr-3d-0rS"/>
                                                 <constraint firstItem="yAw-Td-Df9" firstAttribute="leading" secondItem="pqp-rO-ab9" secondAttribute="leading" constant="20" id="y1K-tW-vZT"/>
@@ -286,6 +297,7 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="commentLabel" destination="yAw-Td-Df9" id="dGO-Kg-7R9"/>
+                                            <outlet property="optionsMenuImage" destination="sBJ-Aj-KKK" id="Y7p-nW-QDa"/>
                                             <outlet property="timeStampLabel" destination="MTh-Zl-REM" id="lm4-ic-0xI"/>
                                             <outlet property="userNameLabel" destination="wj0-F3-5vq" id="rhp-xF-Qzw"/>
                                         </connections>
@@ -632,6 +644,7 @@
     <resources>
         <image name="addThoughtIcon" width="21" height="24"/>
         <image name="commentIcon" width="26" height="22"/>
+        <image name="ellipsis" width="30" height="30"/>
         <image name="starIconFilled" width="20" height="19"/>
     </resources>
 </document>
