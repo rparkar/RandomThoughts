@@ -55,7 +55,7 @@ class AddThoughtsViewController: UIViewController {
     
     @IBAction func postButtonPressed(_ sender: Any) {
         
-        guard let username = userNameTextField.text else {return}
+       // guard let username = userNameTextField.text else {return}
         
         Firestore.firestore().collection(THOUGHTS_REF).addDocument(data: [
             CATEGORY: selectedCategory,
@@ -63,7 +63,7 @@ class AddThoughtsViewController: UIViewController {
             NUM_LIKES: 0,
             THOUGHT_TEXT: thoughtsTextView.text,
             TIMESTAMP:FieldValue.serverTimestamp(),
-            USERNAME : username,
+            USERNAME : Auth.auth().currentUser?.displayName ?? "",
             USER_ID: Auth.auth().currentUser?.uid ?? ""
             ]) { (error) in
             

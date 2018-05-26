@@ -138,9 +138,46 @@ class ThoughtsViewController: UIViewController {
 
 extension ThoughtsViewController : UITableViewDelegate, UITableViewDataSource, ThoughtDelegate {
     
+    
+    
     func thoughtOptionsMenuTapped(thought: Thoughts) {
         
-        
+        let alert = UIAlertController(title: "Delete?", message: "Are you sure you want to delete", preferredStyle: .actionSheet)
+        let deleteAction = UIAlertAction(title: "Delete THought", style: .destructive) { (action) in
+            
+            //TODO
+            
+            self.delete(collection: Firestore.firestore().collection(THOUGHTS_REF).document(thought.documentId).collection(COMMENTS_REF))
+            Firestore.firestore().collection(THOUGHTS_REF).document(thought.documentId).delete(completion: { (error) in
+                
+                if let error = error {
+                    debugPrint("error deleting \(error.localizedDescription)")
+                } else {
+                    self.dismiss(animated: true, completion: nil)
+                }
+            })
+            
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        alert.addAction(deleteAction)
+        alert.addAction(cancelAction)
+        present(alert, animated: true, completion: nil)
+    }
+    
+    func delete(collection: CollectionReference, batchSize: Int = 100) {
+        // Limit query to avoid out-of-memory errors on large collections.
+        // When deleting a collection guaranteed to fit in memory, batching can be avoided entirely.
+        collection.limit(to: batchSize).getDocuments { (docset, error) in
+            // An error occurred.
+            let docset = docset
+            
+            let batch = collection.firestore.batch()
+            docset?.documents.forEach { batch.deleteDocument($0.reference) }
+            
+            batch.commit {_ in
+                self.delete(collection: collection, batchSize: batchSize)
+            }
+        }
     }
     
     
