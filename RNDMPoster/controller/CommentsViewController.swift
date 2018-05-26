@@ -119,7 +119,11 @@ extension CommentsViewController: UITableViewDelegate, UITableViewDataSource, Co
         let alert = UIAlertController(title: "Edit Comment?", message: "You can delete or edit your comment", preferredStyle: .actionSheet)
         
         let editAction = UIAlertAction(title: "Edit comment", style: .default) { (action) in
-            //edit
+            
+            
+            self.performSegue(withIdentifier: "updateCommentVC", sender: (comment, self.thought))
+            alert.dismiss(animated: true, completion: nil)
+            
         }
         
         let deleteAction = UIAlertAction(title: "Delete Comment", style: .destructive) { (action) in
@@ -167,6 +171,16 @@ extension CommentsViewController: UITableViewDelegate, UITableViewDataSource, Co
         present(alert, animated: true, completion: nil)
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if let destination = segue.destination as? UpdateCommentViewController {
+            
+            if let commentData = sender as? (comment: Comments, thought: Thoughts) {
+                destination.commentData = commentData
+                
+            }
+        }
+    }
     
     
     func numberOfSections(in tableView: UITableView) -> Int {
