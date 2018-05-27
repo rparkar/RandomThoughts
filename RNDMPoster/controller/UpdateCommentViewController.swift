@@ -14,7 +14,6 @@ class UpdateCommentViewController: UIViewController {
     //outlets
     
     @IBOutlet weak var commentTextView: UITextView!
-    
     @IBOutlet weak var updateButton: UIButton!
     
     

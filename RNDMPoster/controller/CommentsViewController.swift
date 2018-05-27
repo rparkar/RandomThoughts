@@ -15,7 +15,7 @@ class CommentsViewController: UIViewController {
     @IBOutlet weak var keyboardView: UIView!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var addCommentTextField: UITextField!
-
+    
     
 
     //varibales
@@ -116,6 +116,7 @@ class CommentsViewController: UIViewController {
 extension CommentsViewController: UITableViewDelegate, UITableViewDataSource, CommentDelegate {
     
     func commentOptionsTapped(comment: Comments) {
+        
         let alert = UIAlertController(title: "Edit Comment?", message: "You can delete or edit your comment", preferredStyle: .actionSheet)
         
         let editAction = UIAlertAction(title: "Edit comment", style: .default) { (action) in
