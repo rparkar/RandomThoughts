@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import GoogleSignIn
 
 enum ThoughtCategory: String {
     case serious = "serious"
@@ -126,10 +127,21 @@ class ThoughtsViewController: UIViewController {
         let firebaseAuth = Auth.auth()
         
         do {
+            logoutSocial()
             try firebaseAuth.signOut()
             
         } catch let signoutError as NSError {
             debugPrint("error signin out \(signoutError)")
+        }
+    }
+    
+    func logoutSocial() {
+        guard let user = Auth.auth().currentUser else {return}
+        for info in (user.providerData) {
+            switch info.providerID {
+            case GoogleAuthProviderID: GIDSignIn.sharedInstance().signOut()
+            default: break
+            }
         }
     }
     

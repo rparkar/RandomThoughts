@@ -37,7 +37,7 @@ class UpdateCommentViewController: UIViewController {
     
     
     @IBAction func updateButtonTapped(_ sender: Any) {
-        Firestore.firestore().collection(THOUGHTS_REF).document(commentData.comment.documentId)
+        Firestore.firestore().collection(THOUGHTS_REF).document(commentData.thought.documentId)
         .collection(COMMENTS_REF).document(commentData.comment.documentId)
             .updateData([COMMENT_TEXT: commentTextView.text]) { (error) in
                 

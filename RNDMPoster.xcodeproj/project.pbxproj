@@ -171,6 +171,7 @@
 				6C93C66E20B3415800378B1C /* Frameworks */,
 				6C93C66F20B3415800378B1C /* Resources */,
 				90828878AECE5398859ABF3B /* [CP] Embed Pods Frameworks */,
+				A38C3CEF217A2D6121C21C7F /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -237,6 +238,7 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-RNDMPoster/Pods-RNDMPoster-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/BoringSSL/openssl.framework",
+				"${BUILT_PRODUCTS_DIR}/GTMOAuth2/GTMOAuth2.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
@@ -250,6 +252,7 @@
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/openssl.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMOAuth2.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
@@ -263,6 +266,24 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-RNDMPoster/Pods-RNDMPoster-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A38C3CEF217A2D6121C21C7F /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-RNDMPoster/Pods-RNDMPoster-resources.sh",
+				"${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleSignIn.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-RNDMPoster/Pods-RNDMPoster-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		C35F02C443661413F008F469 /* [CP] Check Pods Manifest.lock */ = {

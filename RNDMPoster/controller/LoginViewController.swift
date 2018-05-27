@@ -8,8 +8,9 @@
 
 import UIKit
 import Firebase
-class LoginViewController: UIViewController {
-
+import GoogleSignIn
+class LoginViewController: UIViewController, GIDSignInUIDelegate {
+    
     //outlets
     
     @IBOutlet private weak var usernameTextField: UITextField!
@@ -20,6 +21,8 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        GIDSignIn.sharedInstance().uiDelegate = self
+        
         loginButton.layer.cornerRadius = 10
         createAccountButton.layer.cornerRadius = 10
         
@@ -42,6 +45,24 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func createAccountButtonPressed(_ sender: Any) {
+    }
+    
+    @IBAction func GoogleSignInPressed(_ sender: Any) {
+        
+        GIDSignIn.sharedInstance().signIn()
+        
+    }
+    
+    func fireBaseLogin(_ credential: AuthCredential) {
+        Auth.auth().signIn(with: credential) { (user, error) in
+            
+            if let error = error {
+                debugPrint(error.localizedDescription)
+                return
+            } else {
+                self.dismiss(animated: true, completion: nil)
+            }
+        }
     }
     
  

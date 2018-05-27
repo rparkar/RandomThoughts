@@ -9,9 +9,12 @@
 import UIKit
 import CoreData
 import Firebase
+import GoogleSignIn
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
+
+    
 
     var window: UIWindow?
 
@@ -19,8 +22,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
         FirebaseApp.configure()
+        GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
+        GIDSignIn.sharedInstance().delegate = self
         // Override point for customization after application launch.
         return true
+    }
+    
+    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
+        
+        if let error = error {
+            debugPrint("Google login failed \(error)")
+        } else {
+            print("signed in")
+            guard let controller = GIDSignIn.sharedInstance().uiDelegate as? LoginViewController else {return}
+            
+            guard let authentication = user.authentication else {return}
+            let credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken, accessToken: authentication.accessToken)
+            controller.fireBaseLogin(credential)
+            
+            
+        }
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
