@@ -515,6 +515,45 @@
                                     <action selector="GoogleSignInPressed:" destination="ZzI-QC-SL6" eventType="touchUpInside" id="eHe-Qx-2eJ"/>
                                 </connections>
                             </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="TRx-bh-Qhf">
+                                <rect key="frame" x="111" y="447" width="160" height="40"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleAspectFit" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kao-W8-JL2" customClass="RoundedButton" customModule="RNDMPoster" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                        <color key="backgroundColor" red="0.23137254901960785" green="0.34901960784313724" blue="0.59607843137254901" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="8fk-we-CaK"/>
+                                            <constraint firstAttribute="width" constant="40" id="BLU-ld-bdW"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Verdana-Bold" family="Verdana" pointSize="29"/>
+                                        <state key="normal" title="f">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleAspectFit" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kE4-ax-eMC" customClass="RoundedButton" customModule="RNDMPoster" customModuleProvider="target">
+                                        <rect key="frame" x="60" y="0.0" width="40" height="40"/>
+                                        <color key="backgroundColor" red="0.82745098039215681" green="0.28235294117647058" blue="0.21176470588235294" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="5eC-BJ-e9Q"/>
+                                            <constraint firstAttribute="width" constant="40" id="lWM-pm-dKI"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="17"/>
+                                        <state key="normal" title="G+"/>
+                                        <connections>
+                                            <action selector="GoogleSignInPressed:" destination="ZzI-QC-SL6" eventType="touchUpInside" id="wbU-ZH-a3P"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleAspectFit" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oUu-Ut-JWX" customClass="RoundedButton" customModule="RNDMPoster" customModuleProvider="target">
+                                        <rect key="frame" x="120" y="0.0" width="40" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="40" id="Yvp-fn-yzb"/>
+                                            <constraint firstAttribute="height" constant="40" id="cBK-l8-csB"/>
+                                        </constraints>
+                                        <state key="normal" image="Twitter-bird-white-on-blue"/>
+                                    </button>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -567,7 +606,7 @@
                 </stackView>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xYu-fe-57f" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1591.2" y="426.83658170914543"/>
+            <point key="canvasLocation" x="-1591.2" y="425.93703148425789"/>
         </scene>
         <!--Create User View Controller-->
         <scene sceneID="gxq-lt-Ug9">
@@ -715,6 +754,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Twitter-bird-white-on-blue" width="300" height="300"/>
         <image name="addThoughtIcon" width="21" height="24"/>
         <image name="commentIcon" width="26" height="22"/>
         <image name="ellipsis" width="30" height="30"/>
