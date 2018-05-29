@@ -12,9 +12,10 @@ import Firebase
 import GoogleSignIn
 import FBSDKLoginKit
 import FBSDKCoreKit
+import TwitterKit
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate{
+class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
 
     
 
@@ -32,6 +33,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate{
         
         //Facebook
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
+        
+        //twitter
+        let key = Bundle.main.object(forInfoDictionaryKey: "consumerKey")
+        let secret = Bundle.main.object(forInfoDictionaryKey: "consumerSecret")
+        if let key = key as? String, let secret = secret as? String {
+            TWTRTwitter.sharedInstance().start(withConsumerKey: key, consumerSecret: secret)
+        }
+        
         // Override point for customization after application launch.
         return true
     }
@@ -59,9 +68,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate{
         
         //facebook
         let returnFacebook = FBSDKApplicationDelegate.sharedInstance().application(app, open: url, options: options)
-        //
+        //twitter
+        let returnTwitter = TWTRTwitter.sharedInstance().application(app, open: url, options: options)
         
-        return returnGoogle || returnFacebook
+        return returnGoogle || returnFacebook || returnTwitter
     }
     
     

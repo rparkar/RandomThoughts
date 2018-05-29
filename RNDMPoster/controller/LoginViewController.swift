@@ -10,9 +10,8 @@ import UIKit
 import Firebase
 import GoogleSignIn
 import FBSDKLoginKit
+import TwitterKit
 
-//varibles
-let loginManager = FBSDKLoginManager()
 
 class LoginViewController: UIViewController, GIDSignInUIDelegate {
 
@@ -24,7 +23,8 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate {
     @IBOutlet private weak var loginButton: UIButton!
     @IBOutlet private weak var createAccountButton: UIButton!
     
-
+    //varibles
+   // let loginManager = FBSDKLoginManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -66,7 +66,8 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate {
     //facebook
     
     @IBAction func facebookLoginButtonPressed(_ sender: Any) {
-        loginManager.logIn(withPublishPermissions: ["email"], from: self) { (result, error) in
+        
+        loginManager.logIn(withReadPermissions: ["email"], from: self) { (result, error) in
             
             if let error = error {
                 debugPrint("Failed FB login \(error)")
@@ -74,6 +75,21 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate {
                print("Failed FB cancelled ")
             } else {
                 let credential = FacebookAuthProvider.credential(withAccessToken: FBSDKAccessToken.current().tokenString)
+                self.fireBaseLogin(credential)
+            }
+        }
+    }
+    
+    //twitter
+    @IBAction func twitterLoginButtonTapped(_ sender: Any) {
+        TWTRTwitter.sharedInstance().logIn { (session, error) in
+            
+            if error = error {
+                debugPrint("could not login in \(error) ")
+            }
+            
+            if let session = session {
+                let credential = TwitterAuthProvider.credential(withToken: session.authToken, secret: session.authTokenSecret)
                 self.fireBaseLogin(credential)
             }
         }

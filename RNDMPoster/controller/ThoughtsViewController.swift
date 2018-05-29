@@ -141,7 +141,8 @@ class ThoughtsViewController: UIViewController {
         for info in (user.providerData) {
             switch info.providerID {
             case GoogleAuthProviderID: GIDSignIn.sharedInstance().signOut()
-            case FacebookAuthProviderID: FBSDKLoginManager().logOut()
+            case FacebookAuthProviderID: loginManager.logOut(); break
+            case TwitterAuthProviderID: print("twtitter log out")
             default: break
             }
         }

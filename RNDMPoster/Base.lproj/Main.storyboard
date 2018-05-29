@@ -554,6 +554,9 @@
                                             <constraint firstAttribute="height" constant="40" id="cBK-l8-csB"/>
                                         </constraints>
                                         <state key="normal" image="Twitter-bird-white-on-blue"/>
+                                        <connections>
+                                            <action selector="twitterLoginButtonTapped:" destination="ZzI-QC-SL6" eventType="touchUpInside" id="O1b-AX-yiP"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                             </stackView>

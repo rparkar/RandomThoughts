@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import FBSDKLoginKit
 
 let THOUGHTS_REF = "thoughts"
 
@@ -25,3 +26,6 @@ let COMMENTS_REF = "comments"
 let COMMENT_TEXT = "commentText"
 
 let USER_ID = "userId"
+
+
+let loginManager = FBSDKLoginManager()

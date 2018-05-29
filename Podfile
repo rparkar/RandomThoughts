@@ -12,6 +12,6 @@ target 'RNDMPoster' do
   
   pod 'GoogleSignIn'
   pod 'FBSDKLoginKit'
-    
+  pod 'TwitterKit'
 
 end
