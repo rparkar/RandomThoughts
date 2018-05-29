@@ -11,5 +11,7 @@ target 'RNDMPoster' do
   pod 'Firebase/Auth'
   
   pod 'GoogleSignIn'
+  pod 'FBSDKLoginKit'
+    
 
 end

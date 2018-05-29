@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 import GoogleSignIn
+import FBSDKLoginKit
 
 enum ThoughtCategory: String {
     case serious = "serious"
@@ -140,6 +141,7 @@ class ThoughtsViewController: UIViewController {
         for info in (user.providerData) {
             switch info.providerID {
             case GoogleAuthProviderID: GIDSignIn.sharedInstance().signOut()
+            case FacebookAuthProviderID: FBSDKLoginManager().logOut()
             default: break
             }
         }
