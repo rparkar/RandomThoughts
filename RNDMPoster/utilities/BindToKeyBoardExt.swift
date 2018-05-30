@@ -24,7 +24,7 @@ extension UIView {
         
         UIView.animateKeyframes(withDuration: duration, delay: 0.0, options: UIViewKeyframeAnimationOptions(rawValue: curve), animations: {
             
-            self.frame.origin.y -= deltaY
+            self.frame.origin.y += deltaY
             
         }, completion: nil)
     }

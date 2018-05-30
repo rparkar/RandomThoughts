@@ -38,7 +38,7 @@ class CommentsViewController: UIViewController {
             username = name
         }
         
-        keyboardView.bindToKeyboard()
+        self.view.bindToKeyboard()
 
     }
     

@@ -82,9 +82,10 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate {
     
     //twitter
     @IBAction func twitterLoginButtonTapped(_ sender: Any) {
+        
         TWTRTwitter.sharedInstance().logIn { (session, error) in
             
-            if error = error {
+            if let error = error {
                 debugPrint("could not login in \(error) ")
             }
             
